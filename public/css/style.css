@@ -2111,3 +2111,26 @@ html { font-size: 18px; }
 }
 
 }
+/**  CART **/
+.cart{
+  align-self: center;
+  padding-top: 4%;
+}
+.CART-title{
+  color: var(--butterfly-blue);
+  text-align: center;
+  border-bottom: 1px solid rgb(170, 219, 241);
+}
+.cart-btn {
+  background: var(--butterfly-blue);
+  color: var(--white);
+  width: max-content;
+  font-weight: var(--weight-600);
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-timing);
+  margin-left: 46%;
+  }
+  
+  .cart-btn:hover { background: var(--cultured); }  

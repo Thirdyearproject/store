@@ -15,15 +15,15 @@ app.get("/",function(req,res){
   res.render("home");
 
 });
-
-
-
-app.get("/personalAccount",function(req,res){
-  
-
+app.get("/favouriteItem",function(req,res){
+  res.render("favoriteItems");
 });
-
-
+app.get("/shoppingCart",function(req,res){
+  res.render("shoppingCart");
+});
+app.get("/personalAccount",function(req,res){
+  res.render("personalAccount");
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
