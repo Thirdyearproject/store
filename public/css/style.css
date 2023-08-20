@@ -284,6 +284,9 @@ border-bottom: 1px solid var(--cultured);
   align-items: center;
   border-bottom: 2px solid var(--cultured);
 }
+.menu-top .action-btn {
+  font-size: 27px;
+}
 
 .menu-top .menu-title {
   color: var(--butterfly-blue);
