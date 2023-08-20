@@ -62,6 +62,25 @@ app.get("/personalAccount",function(req,res){
   res.render("personalAccount");
 });
 
+app.get("/admin", async (req, res) => {
+  try {
+    const collections = await mongoose.connection.db.listCollections().toArray();
+
+    const databaseData = {};
+
+    for (const collection of collections) {
+      const collectionName = collection.name;
+      const collectionData = await mongoose.connection.db.collection(collectionName).find({}).toArray();
+      databaseData[collectionName] = collectionData;
+    }
+
+    res.render("admin", { databaseData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred.");
+  }
+});
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });

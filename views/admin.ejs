@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Page</h1>
+
+    <% for (const collectionName in databaseData) { %>
+        <h2>
+            <%= collectionName %>
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <% for (const key in databaseData[collectionName][0]) { %>
+                        <th>
+                            <%= key %>
+                        </th>
+                        <% } %>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const document of databaseData[collectionName]) { %>
+                    <tr>
+                        <% for (const key in document) { %>
+                            <td>
+                                <%= document[key] %>
+                            </td>
+                            <% } %>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <% } %>
+
+</body>
+
+</html>
