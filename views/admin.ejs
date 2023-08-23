@@ -2,24 +2,11 @@
 <html>
 
 <head>
-    <title>Admin Page</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <title>Admin Panel</title>
 </head>
 
 <body>
-    <h1>Admin Page</h1>
+    <h1>Admin Panel</h1>
 
     <% for (const collectionName in databaseData) { %>
         <h2>
@@ -33,20 +20,29 @@
                             <%= key %>
                         </th>
                         <% } %>
+                            <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <% for (const document of databaseData[collectionName]) { %>
                     <tr>
+                        <td>
+                            <a href="/admin/details/<%= collectionName %>/<%= document._id %>">View Details</a>
+                        </td>
                         <% for (const key in document) { %>
                             <td>
                                 <%= document[key] %>
                             </td>
                             <% } %>
+                                <td>
+                                    <a href="/admin/edit/<%= collectionName %>/<%= document._id %>">Edit</a>
+                                    <a href="/admin/delete/<%= collectionName %>/<%= document._id %>">Delete</a>
+                                </td>
                     </tr>
                     <% } %>
             </tbody>
         </table>
+        <a href="/admin/create/<%= collectionName %>">Add New</a>
         <% } %>
 
 </body>

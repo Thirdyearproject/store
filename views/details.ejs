@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document Details</title>
+</head>
+
+<body>
+    <h1>
+        <%= collectionName %> Collection - Document Details
+    </h1>
+
+    <table>
+        <tbody>
+            <% for (const key in document) { %>
+                <tr>
+                    <td><strong>
+                            <%= key %>:
+                        </strong></td>
+                    <% if (key==='sub_title' ) { %>
+                        <ul>
+                            <% for (const sub of document[key]) { %>
+                                <li>
+                                    <%= sub.sub_title %>
+                                </li>
+                                <% } %>
+                        </ul>
+                        <% } else { %>
+                            <%= document[key] %>
+                                <% } %>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+
+    <a href="/admin">Back to Admin Panel</a>
+</body>
+
+</html>
