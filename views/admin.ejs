@@ -26,12 +26,19 @@
             <tbody>
                 <% for (const document of databaseData[collectionName]) { %>
                     <tr>
-                        <td>
-                            <a href="/admin/details/<%= collectionName %>/<%= document._id %>">View Details</a>
-                        </td>
                         <% for (const key in document) { %>
                             <td>
-                                <%= document[key] %>
+                                <% if (key==='sub_title' ) { %>
+                                    <ul>
+                                        <% for (const sub of document[key]) { %>
+                                            <li>
+                                                <%= sub.sub_title %>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                    <% } else { %>
+                                        <%= document[key] %>
+                                            <% } %>
                             </td>
                             <% } %>
                                 <td>

@@ -80,25 +80,6 @@ app.get("/admin", async (req, res) => {
     res.status(500).send("An error occurred.");
   }
 });
-app.get("/admin/details/:collection/:id", async (req, res) => {
-  try {
-      const collectionName = req.params.collection;
-      const documentId = req.params.id;
-
-      // Fetch the document from the specified collection and document ID
-      const document = await mongoose.connection.db.collection(collectionName).findOne({ _id: new mongoose.Types.ObjectId(documentId) });
-
-      if (!document) {
-          return res.status(404).send("Document not found.");
-      }
-
-      // Render the details view with the retrieved document
-      res.render("details", { collectionName, document });
-  } catch (error) {
-      console.error(error);
-      res.status(500).send("An error occurred.");
-  }
-});
 
 app.get("/admin/edit/:collection/:id", async (req, res) => {
   try {
@@ -126,11 +107,15 @@ app.post("/admin/update/:collection/:id", async (req, res) => {
     const documentId = req.params.id;
     const updatedData = req.body;
 
+    // Get the appropriate Mongoose model for the
+
     // Update the document in the specified collection and document ID
-    await mongoose.connection.db.collection(collectionName).updateOne(
-      { _id: mongoose.Types.ObjectId(documentId) },
+    const result = await mongoose.connection.db.collection(collectionName).updateOne(
+      { _id: new mongoose.Types.ObjectId(documentId) },
       { $set: updatedData }
     );
+
+    console.log("Update Result:", result);
 
     res.redirect("/admin");
   } catch (error) {
@@ -138,8 +123,6 @@ app.post("/admin/update/:collection/:id", async (req, res) => {
     res.status(500).send("An error occurred.");
   }
 });
-
-
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");

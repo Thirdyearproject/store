@@ -12,17 +12,19 @@
         <% for (const key in document) { %>
             <% if (key==='sub_titles' ) { %>
                 <label for="sub_titles">Sub Titles:</label><br>
-                <% for (const sub_title of document.sub_titles) { %>
-                    <input type="text" name="sub_title" value="<%= sub_title.value %>"><br>
-                    <% } %>
-                        <% } else if (key !=='_id' ) { %>
-                            <label for="<%= key %>">
-                                <%= key %>:
-                            </label>
-                            <input type="text" name="<%= key %>" id="<%= key %>" value="<%= document[key] %>"><br>
-                            <% } %>
+                <% for (let i=0; i < document.sub_titles.length; i++) { %>
+                    <%=console.log(document.sub_titles[i].value)%>
+                        <input type="text" name="sub_titles[<%= i %>].value"
+                            value="<%= document.sub_titles[i].value %>"><br>
+                        <% } %>
+                            <% } else if (key !=='_id' ) { %>
+                                <label for="<%= key %>">
+                                    <%= key %>:
+                                </label>
+                                <input type="text" name="<%= key %>" id="<%= key %>" value="<%= document[key] %>"><br>
                                 <% } %>
-                                    <button type="submit">Save Changes</button>
+                                    <% } %>
+                                        <button type="submit">Save Changes</button>
     </form>
 
     <a href="/admin">Back to Admin Panel</a>
