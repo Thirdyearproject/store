@@ -124,6 +124,9 @@ app.post("/admin/update/:collection/:id", async (req, res) => {
   }
 });
 
+app.get("/admin/dynamicPage",function(req,res){
+  res.render("dynamicPage");
+});
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
