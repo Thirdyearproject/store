@@ -182,8 +182,8 @@ if(!req.body.page_url){
               //create page without photo
               let data ={
                   PageUrl : req.body.Page_Url,
-                  PageNavText : req.body.Page_Meta_Description,
-                  PageTitle : req.body.Page_Meta_Keyword,
+                  PageNavText : req.body.Page_Nav_Text,
+                  PageTitle : req.body.Page_Title,
                   PageMetaDescrition : req.body.Page_Meta_Description,
                   PageMetaKeyword : req.body.Page_Meta_Keyword,
                   PageHeading : req.body.Page_Heading,
@@ -204,8 +204,8 @@ if(!req.body.page_url){
           //create page with photo
           let data ={
               PageUrl : req.body.Page_Url,
-              PageNavText : req.body.Page_Meta_Description,
-              PageTitle : req.body.Page_Meta_Keyword,
+              PageNavText : req.body.Page_Nav_Text,
+              PageTitle : req.body.Page_Title,
               PageMetaDescrition : req.body.Page_Meta_Description,
               PageMetaKeyword : req.body.Page_Meta_Keyword,
               PageHeading : req.body.Page_Heading,
@@ -238,13 +238,12 @@ app.get('/admin/pages/edit-pages/:id', (req, res)=>{
 })
 
 app.put('/admin/pages/edit-pages/:id', upload.single('Page_Photo'), (req, res)=>{
-  console.log(req.body)
   if(!req.file){
     // without image update
     pageModel.updateOne({PageUrl:req.params.id}, {$set:{
       PageUrl : req.body.Page_Url,
-      PageNavText : req.body.Page_Meta_Description,
-      PageTitle : req.body.Page_Meta_Keyword,
+      PageNavText : req.body.Page_Nav_Text,
+      PageTitle : req.body.Page_Title,
       PageMetaDescrition : req.body.Page_Meta_Description,
       PageMetaKeyword : req.body.Page_Meta_Keyword,
       PageHeading : req.body.Page_Heading,
@@ -253,7 +252,7 @@ app.put('/admin/pages/edit-pages/:id', upload.single('Page_Photo'), (req, res)=>
     .then((x)=>{
         res.redirect('/admin/navigationPage/')
     }).catch((y)=>{
-      console.log(y)
+      // console.log(y)
   })
     //end
 }
@@ -261,20 +260,29 @@ else{
     // with image update
     pageModel.updateOne({PageUrl:req.params.id}, {$set:{
       PageUrl : req.body.Page_Url,
-      PageNavText : req.body.Page_Meta_Description,
-      PageTitle : req.body.Page_Meta_Keyword,
+      PageNavText : req.body.Page_Nav_Text,
+      PageTitle : req.body.Page_Title,
       PageMetaDescrition : req.body.Page_Meta_Description,
       PageMetaKeyword : req.body.Page_Meta_Keyword,
       PageHeading : req.body.Page_Heading,
-      PagePhoto : req.body.file,
+      PagePhoto : req.file.filename,
       PageDetails :req.body.Page_Details
     }})
     .then((x)=>{
         res.redirect('/admin/navigationPage/')
     }).catch((y)=>{
-      console.log(y)
+      // console.log(y)
   })
 }
+})
+
+app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
+  pageModel.deleteOne({PageUrl:req.params.id})
+  .then((x)=>{
+      res.redirect('/admin/navigationPage/')
+  }).catch((y)=>{
+      console.log(y)
+  })
 })
 
 app.listen(3000, function() {
