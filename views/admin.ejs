@@ -2,56 +2,19 @@
 <html>
 
 <head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/admin-style.css">
+
     <title>Admin Panel</title>
 </head>
 
 <body>
     <h1>Admin Panel</h1>
-
-    <% for (const collectionName in databaseData) { %>
-        <h2>
-            <%= collectionName %>
-        </h2>
-        <table>
-            <thead>
-                <tr>
-                    <% for (const key in databaseData[collectionName][0]) { %>
-                        <th>
-                            <%= key %>
-                        </th>
-                        <% } %>
-                            <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (const document of databaseData[collectionName]) { %>
-                    <tr>
-                        <% for (const key in document) { %>
-                            <td>
-                                <% if (key==='sub_title' ) { %>
-                                    <ul>
-                                        <% for (const sub of document[key]) { %>
-                                            <li>
-                                                <%= sub.sub_title %>
-                                            </li>
-                                            <% } %>
-                                    </ul>
-                                    <% } else { %>
-                                        <%= document[key] %>
-                                            <% } %>
-                            </td>
-                            <% } %>
-                                <td>
-                                    <a href="/admin/edit/<%= collectionName %>/<%= document._id %>">Edit</a>
-                                    <a href="/admin/delete/<%= collectionName %>/<%= document._id %>">Delete</a>
-                                </td>
-                    </tr>
-                    <% } %>
-            </tbody>
-        </table>
-        <a href="/admin/create/<%= collectionName %>">Add New</a>
-        <% } %>
-
+    <br> <a class="btn btn-success btn-md" href="/admin/dynamicPage">
+        Pages</a>
+    <br> <a class="btn btn-success btn-md" href="/admin/headerMenuDatabase">
+        header menu</a>
 </body>
 
 </html>

@@ -97,69 +97,13 @@ app.get("/personalAccount",function(req,res){
 });
 
 app.get("/admin", async (req, res) => {
-  try {
-    const collections = await mongoose.connection.db.listCollections().toArray();
-
-    const databaseData = {};
-
-    for (const collection of collections) {
-      const collectionName = collection.name;
-      const collectionData = await mongoose.connection.db.collection(collectionName).find({}).toArray();
-      databaseData[collectionName] = collectionData;
-    }
-
-    res.render("admin", { databaseData });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred.");
-  }
+  res.render("admin");
 });
-
-app.get("/admin/edit/:collection/:id", async (req, res) => {
-  try {
-    const collectionName = req.params.collection;
-    const documentId = req.params.id;
-
-    // Fetch the document from the specified collection and document ID
-    const document = await mongoose.connection.db.collection(collectionName).findOne({ _id: new mongoose.Types.ObjectId(documentId) });
-
-    if (!document) {
-      return res.status(404).send("Document not found.");
-    }
-
-    res.render("edit", { collectionName, document }); // Make sure you pass the correct view template name
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred.");
-  }
-});
-
-// Define a route for updating a document
-app.post("/admin/update/:collection/:id", async (req, res) => {
-  try {
-    const collectionName = req.params.collection;
-    const documentId = req.params.id;
-    const updatedData = req.body;
-
-    // Get the appropriate Mongoose model for the
-
-    // Update the document in the specified collection and document ID
-    const result = await mongoose.connection.db.collection(collectionName).updateOne(
-      { _id: new mongoose.Types.ObjectId(documentId) },
-      { $set: updatedData }
-    );
-
-    console.log("Update Result:", result);
-
-    res.redirect("/admin");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred.");
-  }
-});
-
 app.get("/admin/dynamicPage",function(req,res){
-  res.render("dynamicPage");
+  pageModel.find({}).count()
+  .then((x)=>{
+  res.render("dynamicPage",{x});
+  })
 });
 
 app.get("/admin/navigationPage",function(req,res){
