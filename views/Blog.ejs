@@ -1,0 +1,35 @@
+<%x.forEach((y)=>{%>
+    <tr>
+        <td>
+            <%if(y.PagePhoto){ %>
+                <img src="/backend/images/<%=y.PagePhoto%>" width="100">
+                <%}else{%>
+                    <img src="/backend/images/no-img.png" width="70">
+                    <%}%>
+        </td>
+        <td>
+            <%=y.PageUrl%>
+        </td>
+        <td>
+            <%=y.PageNavText%>
+        </td>
+        <td>
+            <%=y.PageTitle%>
+        </td>
+        <td>
+            <%=y.PageMetaDescrition%>
+        </td>
+        <td>
+            <%=y.PageMetaKeyword%>
+        </td>
+        <td>
+            <%=y.PageHeading%>
+        </td>
+        <td>
+            <%=y.PageDetails.slice(0, 20)%>
+        </td>%></td>
+        <td>
+            <a href="/BlogMainPage/<%=y.PageUrl%>">view details</a>
+        </td>
+    </tr>
+    <%x})%>

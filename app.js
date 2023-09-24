@@ -95,6 +95,20 @@ app.get("/shoppingCart",function(req,res){
 app.get("/personalAccount",function(req,res){
   res.render("personalAccount");
 });
+app.get("/BlogMainPage", async (req, res) => {
+  pageModel.find({})
+  .then((x)=>{
+      res.render('Blog', {x})
+  })
+});
+app.get("/BlogMainPage/:id", async (req, res) => {
+  pageModel.findOne({PageUrl :req.params.id})
+  .then((y)=>{
+    console.log(y)
+    res.render("singleBlog",{y});
+})
+});
+
 
 app.get("/admin", async (req, res) => {
   res.render("admin");
