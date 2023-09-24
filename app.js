@@ -24,16 +24,16 @@ mongoose.set('strictQuery', false);
 
 // MAIN //
 //HEADER DATABASE//
-const HeaderMenuSchema = new mongoose.Schema ({
-  title: String,
-  sub_title: [{sub_title:String}]
-});
-const headerMenu=  mongoose.model("headerMenu", HeaderMenuSchema);
+let pageModel = require('./model/pageModal')
+let headerMenu=require('./model/headerMenu')
+
+
+//default items
 const title1=new headerMenu({title:"Men's",sub_title:[{sub_title:"Shirt"},{sub_title:"Shorts & Jeans"},{sub_title:"Safety Shoes"}]});
-const title2=new headerMenu({title:"Women's",sub_title:[{sub_title:"Dress & Frock"},{sub_title:"Earrings"},{sub_title:"Necklace"}]});
-const title3=new headerMenu({title:"Jewelry",sub_title:[{sub_title:"Earrings"},{sub_title:"Couple Rings"},{sub_title:"Necklace"}]});
-const title4=new headerMenu({title:"Perfume",sub_title:[{sub_title:"Clothes Perfume"},{sub_title:"Deodorant"},{sub_title:"Flower Fragrance"}]});
-const defaulttitles=[title1,title2,title3,title4]
+  const title2=new headerMenu({title:"Women's",sub_title:[{sub_title:"Dress & Frock"},{sub_title:"Earrings"},{sub_title:"Necklace"}]});
+  const title3=new headerMenu({title:"Jewelry",sub_title:[{sub_title:"Earrings"},{sub_title:"Couple Rings"},{sub_title:"Necklace"}]});
+  const title4=new headerMenu({title:"Perfume",sub_title:[{sub_title:"Clothes Perfume"},{sub_title:"Deodorant"},{sub_title:"Flower Fragrance"}]});
+  const defaulttitles=[title1,title2,title3,title4]
 headerMenu.find({}).then(function (founditems) {
   if(founditems.length == 0){
   headerMenu.insertMany(defaulttitles)
@@ -44,18 +44,6 @@ headerMenu.find({}).then(function (founditems) {
     console.log(err);
   });}
 });
-
-const pageSchema = new mongoose.Schema({
-  PageUrl : String,
-  PageNavText : String,
-  PageTitle : String,
-  PageMetaDescrition : String,
-  PageMetaKeyword : String,
-  PageHeading : String,
-  PagePhoto : String,
-  PageDetails : String
-  });
-  const  pageModel = mongoose.model('dynamicPages', pageSchema)
 
 //storage and filename
   let storage = multer.diskStorage({
@@ -104,7 +92,6 @@ app.get("/BlogMainPage", async (req, res) => {
 app.get("/BlogMainPage/:id", async (req, res) => {
   pageModel.findOne({PageUrl :req.params.id})
   .then((y)=>{
-    console.log(y)
     res.render("singleBlog",{y});
 })
 });
@@ -210,7 +197,6 @@ app.put('/admin/pages/edit-pages/:id', upload.single('Page_Photo'), (req, res)=>
     .then((x)=>{
         res.redirect('/admin/navigationPage/')
     }).catch((y)=>{
-      // console.log(y)
   })
     //end
 }
@@ -227,11 +213,12 @@ else{
       PageDetails :req.body.Page_Details
     }})
     .then((x)=>{
+      
         res.redirect('/admin/navigationPage/')
     }).catch((y)=>{
       // console.log(y)
   })
-}
+} console.log(req.body.Page_Meta_Description)
 })
 
 app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
