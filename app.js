@@ -28,6 +28,21 @@ let pageModel = require('./model/pageModal')
 let headerMenu=require('./model/headerMenu')
 
 
+//update part*******************************************************************************************
+const errorMiddleware=require('./middlewares/errors')
+
+app.use(express.json());
+
+//Import all routes
+const products=require('./routes/product');
+
+app.use('/api/v1',products)
+
+//middleware to handle errors
+app.use(errorMiddleware);
+//updated part*********************************************************************************************
+
+
 //default items
 const title1=new headerMenu({title:"Men's",sub_title:[{sub_title:"Shirt"},{sub_title:"Shorts & Jeans"},{sub_title:"Safety Shoes"}]});
   const title2=new headerMenu({title:"Women's",sub_title:[{sub_title:"Dress & Frock"},{sub_title:"Earrings"},{sub_title:"Necklace"}]});
