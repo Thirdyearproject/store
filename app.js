@@ -29,17 +29,17 @@ let headerMenu=require('./model/headerMenu')
 
 
 //update part*******************************************************************************************
-const errorMiddleware=require('./middlewares/errors')
+// const errorMiddleware=require('./middlewares/errors')
 
-app.use(express.json());
+// app.use(express.json());
 
-//Import all routes
-const products=require('./routes/product');
+// //Import all routes
+// const products=require('./routes/product');
 
-app.use('/api/v1',products)
+// app.use('/api/v1',products)
 
-//middleware to handle errors
-app.use(errorMiddleware);
+// //middleware to handle errors
+// app.use(errorMiddleware);
 //updated part*********************************************************************************************
 
 
