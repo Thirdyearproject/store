@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
 
-mongoose.set('strictQuery', true); mongoose.connect('mongodb://127.0.0.1/webDB');
-mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', true); mongoose.connect('mongodb://127.0.0.1/webDB');
+// mongoose.set('strictQuery', false);
 
 // MAIN //
 //HEADER DATABASE//
@@ -29,17 +29,19 @@ let headerMenu=require('./model/headerMenu')
 
 
 //update part*******************************************************************************************
-// const errorMiddleware=require('./middlewares/errors')
+const errorMiddleware=require('./backend/middlewares/errors')
 
-// app.use(express.json());
+app.use(express.json());
 
-// //Import all routes
-// const products=require('./routes/product');
+//Import all routes
+const products=require('./backend/routes/product');
+const users=require('./backend/routes/user');
 
-// app.use('/api/v1',products)
+app.use('/api/v1',products)
+app.use('/api/v1',users)
 
-// //middleware to handle errors
-// app.use(errorMiddleware);
+//middleware to handle errors
+app.use(errorMiddleware);
 //updated part*********************************************************************************************
 
 
@@ -245,6 +247,4 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
   })
 })
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
-});
+module.exports = app;

@@ -1,39 +1,41 @@
 const Product=require('../models/product')
 
 const ErrorHandler=require('../utils/errorHandler');
+const catchAsyncErrors=require('../middlewares/catchAsyncErrors')
+
+const APIFeatures=require('../utils/apiFeatures');
 
 
-const Features=('../utils/features');
+//create new product=> /api/v1/admin/product/new
+exports.newProduct=catchAsyncErrors(async(req,res,next)=>{  
 
-exports.newProduct=async(req,res,next)=>{  
 
     const product=await Product.create(req.body);
     res.status(201).json({
         success:true,
         product
     })
-}
+})
 
 
 
-//get products=>/api/v1/products
-exports.getProducts=async(req,res,next)=>{
+//get all products=>/api/v1/products?keyword=.....
+exports.getProducts=catchAsyncErrors(async(req,res,next)=>{
 
-
-    const features=new Features(Product.find(),req.query).search()
-
-
-    const products=await features.find();
+    const apiFeatures=new APIFeatures(Product.find(),req.query)
+                        .search()
+                        .filter()
+    const products=await apiFeatures.query;
 
     res.status(200).json({
         success:true,
         count:products.length,
         products
     })
-}
+})
 
 //get seingle product=>/api/v1/admin/product/:id
-exports.getSingleProduct=async(req,res,next)=>{
+exports.getSingleProduct=catchAsyncErrors(async(req,res,next)=>{
     const product=await Product.findById(req.params.id);
     if(!product){
         return next(new ErrorHandler('Product not found',404))
@@ -43,10 +45,10 @@ exports.getSingleProduct=async(req,res,next)=>{
         success:true,
         product
     })
-}
+})
 
 //update product=>/api/v1/admin/product/:id
-exports.updateProduct = async(req,res,next)=>{
+exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
     let product=await Product.findById(req.params.id);
 
     if(!product){
@@ -64,10 +66,10 @@ exports.updateProduct = async(req,res,next)=>{
         product
     })
 
-}
+})
 
 //Delete product=> /api/v1/admin/product/:id
-exports.deleteProduct=async(req,res,next)=>{
+exports.deleteProduct=catchAsyncErrors(async(req,res,next)=>{
     const product=await Product.findById(req.params.id);
 
     if(!product){
@@ -80,4 +82,4 @@ exports.deleteProduct=async(req,res,next)=>{
         success:true,
         message:'product deleted'
     })
-}
+})
