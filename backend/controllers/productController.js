@@ -19,7 +19,7 @@ exports.newProduct=catchAsyncErrors(async(req,res,next)=>{
 
 
 
-//get all products=>/api/v1/products?keyword=...
+//get all products=>/api/v1/products?keyword=.....
 exports.getProducts=catchAsyncErrors(async(req,res,next)=>{
 
     const apiFeatures=new APIFeatures(Product.find(),req.query)
