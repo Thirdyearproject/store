@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
 
-mongoose.set('strictQuery', true); mongoose.connect('mongodb://127.0.0.1/webDB');
-mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', true); mongoose.connect('mongodb://127.0.0.1/webDB');
+// mongoose.set('strictQuery', false);
 
 // MAIN //
 //HEADER DATABASE//
@@ -245,6 +245,4 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
   })
 })
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
-});
+module.exports = app;
