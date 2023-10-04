@@ -35,7 +35,7 @@ app.use(express.json());
 
 //Import all routes
 const products=require('./backend/routes/product');
-const users=require('.backend/routes/user');
+const users=require('./backend/routes/user');
 
 app.use('/api/v1',products)
 app.use('/api/v1',users)
