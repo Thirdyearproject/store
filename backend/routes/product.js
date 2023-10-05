@@ -3,7 +3,7 @@ const router=express.Router();
 
 const {getProducts,newProduct, getSingleProduct,updateProduct,deleteProduct}=require('../controllers/productController');
 
-const{isAuthenticatedUser,authorizeRoles}=require('../middlewares/user');
+const{isAuthenticatedUser}=require('../middlewares/user');
 
 router.route(`/products`).get(getProducts);
 
