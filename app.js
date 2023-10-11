@@ -30,8 +30,10 @@ let headerMenu=require('./model/headerMenu')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
+const cookieParser=require('cookie-parser')
 
 app.use(express.json());
+app.use(cookieParser());
 
 //Import all routes
 const products=require('./backend/routes/product');
