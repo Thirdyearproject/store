@@ -1,35 +1,41 @@
-<%x.forEach((y)=>{%>
-    <tr>
-        <td>
-            <%if(y.PagePhoto){ %>
-                <img src="/backend/images/<%=y.PagePhoto%>" width="100">
-                <%}else{%>
-                    <img src="/backend/images/no-img.png" width="70">
-                    <%}%>
-        </td>
-        <td>
-            <%=y.PageUrl%>
-        </td>
-        <td>
-            <%=y.PageNavText%>
-        </td>
-        <td>
-            <%=y.PageTitle%>
-        </td>
-        <td>
-            <%=y.PageMetaDescrition%>
-        </td>
-        <td>
-            <%=y.PageMetaKeyword%>
-        </td>
-        <td>
-            <%=y.PageHeading%>
-        </td>
-        <td>
-            <%=y.PageDetails.slice(0, 20)%>
-        </td>%></td>
-        <td>
-            <a href="/BlogMainPage/<%=y.PageUrl%>">view details</a>
-        </td>
-    </tr>
-    <%x})%>
+<%- include('partials/header'); -%>
+    <div class="banner">
+
+        <div class="container">
+
+            <div class="slider-container has-scrollbar">
+
+                <%x.forEach((y)=>{%>
+                    <div class="slider-item">
+                        <%if(y.PagePhoto){ %>
+                            <img src="/backend/images/<%=y.PagePhoto%>" width="100" class="banner-img">
+                            <%}else{%>
+                                <img src="/backend/images/no-img.png" width="70" class="banner-img">
+                                <%}%>
+
+                                    <div class="banner-content">
+
+                                        <p class="banner-subtitle">
+                                            <%=y.PageNavText%>
+                                        </p>
+
+                                        <h2 class="banner-title">
+                                            <%=y.PageTitle%>
+                                        </h2>
+
+                                        <p class="banner-text">
+                                            <%=y.PageDetails.slice(0, 20)%>
+                                        </p>
+
+                                        <a href="/BlogMainPage/<%=y.PageUrl%>" class="banner-btn">View More</a>
+
+                                    </div>
+
+                    </div>
+                    <%x})%>
+            </div>
+
+        </div>
+
+    </div>
+    <%- include('partials/footer'); -%>

@@ -1,0 +1,265 @@
+/* global scope */
+:root {
+    /**
+     * colors
+     */
+
+    --spanish-gray: hsl(0, 0%, 60%);
+    --sonic-silver: hsl(0, 0%, 47%);
+    --eerie-black: hsl(0, 0%, 13%);
+    --butterfly-blue: hsl(201, 93%, 57%);
+    --sandy-brown: hsl(29, 90%, 65%);
+    --red: hsl(0, 100%, 51%);
+    --ocean-green: hsl(152, 51%, 52%);
+    --davys-gray: hsl(0, 0%, 33%);
+    --cultured: hsl(0, 0%, 93%);
+    --white: hsl(0, 100%, 100%);
+    --onyx: hsl(0, 0%, 27%);
+
+    /**
+     * typography
+     */
+
+    --fs-1: 1.563rem;
+    --fs-2: 1.375rem;
+    --fs-3: 1.25rem;
+    --fs-4: 1.125rem;
+    --fs-5: 1rem;
+    --fs-6: 0.938rem;
+    --fs-7: 0.875rem;
+    --fs-8: 0.813rem;
+    --fs-9: 0.75rem;
+    --fs-10: 0.688rem;
+    --fs-11: 0.625rem;
+
+    --weight-300: 300;
+    --weight-400: 400;
+    --weight-500: 500;
+    --weight-600: 600;
+    --weight-700: 700;
+
+    /**
+     * border-radius
+     */
+
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+
+    /**
+     * transition 
+     */
+
+    --transition-timing: 0.2s ease;
+
+}
+
+.bg {
+    background-color: #f5f5f5;
+}
+.bg h2{
+    margin-left: 50px;
+    padding: 20px;
+  }
+.account_page {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.account_page .profile {
+    width: 30%;
+    background-color: #ffffff;
+}
+
+.account_page .account_detail {
+    width: 69.5%;
+    background-color: #ffffff;
+}
+
+.account_page .profile .profile_detail {
+    width: 140px;
+    height: 160px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    text-align: center;
+    overflow: none;
+}
+
+.account_page .profile .profile_detail img {
+    width: 100%;
+    height: 140px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px #888888;
+    object-fit: cover;
+}
+
+.account_page .profile ul {
+    list-style: none;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.account_page .profile ul li {
+    margin-bottom: 5px;
+}
+
+.account_page .profile ul li a {
+    color: var(--davys-gray);
+    text-decoration: none;
+    border: 1px solid rgba(236, 240, 241, 0.3);
+    text-align: left;
+    padding: 5px 8px;
+    display: block;
+}
+
+.account_page .profile ul li a span {
+    float: right;
+}
+
+.account_page .profile ul li a:hover {
+    color: var(--butterfly-blue) !important;
+}
+
+.active {
+    background-color: var(--spanish-gray);
+}
+
+.account_page .account_detail .Personal h3 {
+    color: var(--davys-gray);
+    background-color: yellow;
+    text-transform: uppercase;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.account_page .account_detail .Personal .form-group {
+    margin: 10px 5px;
+    width: calc(100% - 10px);
+}
+
+.account_page .account_detail .Personal label {
+    display: block;
+    color: var(--davys-gray);
+    margin-bottom: 6px;
+}
+
+.account_page .account_detail .Personal input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px 5px;
+}
+
+.account_page .account_detail .Personal input:focus,
+select:focus,
+textarea:focus {
+    outline: 1px solid var(--davys-gray);
+}
+
+.account_page .account_detail .Personal .form-inline {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Cart */
+.account_page .account_detail .container {
+    width: 70%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px 10px;
+}
+
+#cart-container table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#cart-container table td {
+    border: 1px solid var(--davys-gray);
+    text-align: center;
+}
+
+#cart-container thead {
+    font-weight: 700;
+}
+
+#cart-container thead td {
+    background: yellow;
+    color: var(--eerie-black);
+    border: none;
+    padding: 6px 0px;
+}
+
+.cartNumber ::-webkit-outer-spin-button,
+.cartNumber ::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+
+}
+.cartNumber{
+    width: 50px;
+    height: 25px;
+    position: relative;
+    padding: 0 10px;
+    top: 20%;
+    left: 23px;
+}
+.icon-color {
+    display: block;
+    margin: 0 auto;
+}
+
+#cart-container table td:nth-child(1) {
+    width: 100px;
+}
+#cart-container table td:nth-child(2){
+    width: 200px;
+}
+
+#cart-container table td:nth-child(3),
+#cart-container table td:nth-child(4),
+#cart-container table td:nth-child(5),
+#cart-container table td:nth-child(6) {
+    width: 100px;
+}
+
+.image-cart{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-left: 100px;
+}
+.cart-summary{
+    width: 25%;
+    height: 220px;
+    border: 1px solid rgba(236, 240, 241, 0.3);
+    padding: 5px;
+    margin-top: 28px;
+}
+.cart-summary h3{
+    color: yellow;
+    background-color: var(--davys-gray);
+    text-transform: uppercase;
+    padding: 10px;
+}
+.cart-summary ul{
+    list-style: none;
+    padding: 10px;
+}
+.cart-summary ul li{
+    margin-bottom: 10px;
+}
+.cart-summary ul li a{
+    color: var(--davys-gray);
+    background-color: yellow;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px 8px;
+    margin-top: 10px;
+}
