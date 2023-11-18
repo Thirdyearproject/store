@@ -10,6 +10,10 @@ const app = express();
 const findOrCreate = require("mongoose-findorcreate");
 let multer=require('multer')
 let methodOverride = require('method-override')
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -19,6 +23,53 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
 
+app.use(express.json());
+app.use(session({
+  secret: "Our little secret.",
+  resave: false,
+  saveUninitialized: false,
+  cookie:{secure:false}
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+const LoginuserSchema = new mongoose.Schema ({
+  email: String,
+  password: String,
+  googleId: String,
+  secret: String
+});
+
+LoginuserSchema.plugin(passportLocalMongoose);
+LoginuserSchema.plugin(findOrCreate);
+
+const LOGINUSER = new mongoose.model("loginUser", LoginuserSchema);
+
+passport.use(LOGINUSER.createStrategy());
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/secrets",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+
+    LOGINUSER.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 // mongoose.set('strictQuery', true); mongoose.connect('mongodb://127.0.0.1/webDB');
 // mongoose.set('strictQuery', false);
 
@@ -31,7 +82,7 @@ let headerMenu=require('./model/headerMenu')
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
 
-app.use(express.json());
+
 
 //Import all routes
 const products=require('./backend/routes/product');
@@ -97,9 +148,65 @@ app.get("/favouriteItem",function(req,res){
 app.get("/shoppingCart",function(req,res){
   res.render("shoppingCart");
 });
+////// authorization/////////////////
+app.get("/auth/google",
+  passport.authenticate('google', { scope: ["profile"] })
+);
+
+app.get("/auth/google/secrets",
+  passport.authenticate('google', { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect to secrets.
+    res.redirect("/Account");
+  });
 app.get("/personalAccount",function(req,res){
-  res.render("personalAccount");
+  res.render("login");
 });
+
+app.get("/login", function(req, res){
+  res.render("login");
+});
+app.get("/register", function(req, res){
+  res.render("register");
+});
+app.get("/Account", function(req, res){
+
+        res.render("personalAccount");
+});
+
+app.post("/register", function(req, res){
+
+  LOGINUSER.register({username: req.body.username}, req.body.password, function(err, user){
+    if (err) {
+      console.log(err);
+      res.redirect("/register");
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/Account");
+      });
+    }
+  });
+
+});
+
+app.post("/login", function(req, res){
+
+  const user = new LOGINUSER({
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  req.login(user, function(err){
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/Account");
+      });
+    }
+  });
+});
+///////////////////////////////////////
 app.get("/BlogMainPage", async (req, res) => {
   pageModel.find({})
   .then((x)=>{
