@@ -14,6 +14,8 @@ const session = require('express-session');
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const axios = require('axios');
+
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -169,24 +171,17 @@ app.get("/Account", function(req, res){
         res.render("personalAccount");
 });
 
-// app.post("/register", function(req, res){
-
-//   LOGINUSER.register({username: req.body.username}, req.body.password, function(err, user){
+// app.post("/api/v1/register", function(req, res){
 //     if (err) {
 //       console.log(err);
 //       res.redirect("/register");
 //     } else {
-//       passport.authenticate("local")(req, res, function(){
-//         res.redirect("/Account");
-//       });
+//         res.redirect("/Account")
 //     }
-//   });
-
 // });
 
 // app.post("/login", function(req, res){
-
-//   const user = new LOGINUSER({
+//   const user = new LOGINUSER(
 //     username: req.body.username,
 //     password: req.body.password
 //   });

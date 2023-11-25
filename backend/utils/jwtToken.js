@@ -1,5 +1,5 @@
 //creat and save token and save in cookie 
-const sendToken=(user,statusCode,res)=>{
+const sendToken=(user,statusCode,res, redirectRoute)=>{
 
     //create jwt token
     const token=user.getJwtToken();
@@ -12,10 +12,16 @@ const sendToken=(user,statusCode,res)=>{
         httpOnly:true
     }
 
-    res.status(statusCode).cookie('token',token,options).json({
-        success:true,
-        token,
-        user
-    })
+    
+    if (statusCode === 200 && redirectRoute) {
+        res.redirect(redirectRoute);
+      }else{
+        console.log("No redirect route provided.");
+        res.status(statusCode).cookie('token',token,options).json({
+            success:true,
+            token,
+            user
+        })
+      }
 }
 module.exports=sendToken;
