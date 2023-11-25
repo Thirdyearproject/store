@@ -41,8 +41,9 @@ exports.loginUser=catchAsyncErrors(async(req,res,next)=>{
 
     if(!isPasswordMatched){
         return next(new ErrorHandler('Invalid Email or Password',401));
-    }
+    }s
     sendToken(user,200,res,"/Account")
+
 })
 
 //Logout user=>/api/v1/logout

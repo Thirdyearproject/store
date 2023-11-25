@@ -83,8 +83,7 @@ let headerMenu=require('./model/headerMenu')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
-
-
+const cookieParser=require('cookie-parser')
 
 //Import all routes
 const product=require('./backend/routes/product');
