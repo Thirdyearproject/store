@@ -79,7 +79,7 @@ passport.use(new GoogleStrategy({
 //HEADER DATABASE//
 let pageModel = require('./model/pageModal')
 let headerMenu=require('./model/headerMenu')
-
+let products=require('./model/productModal')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
@@ -140,9 +140,11 @@ let upload = multer({
   }})  
 // ROUTES//
 app.get("/",function(req,res){
+  products.find({}).then(function (foundproducts) {
   headerMenu.find({}).then(function (founditems) {
-  res.render("home", {titles: founditems});
+  res.render("home", {titles: founditems,products: foundproducts});
   });
+});
 
 });
 app.get("/favouriteItem",function(req,res){
