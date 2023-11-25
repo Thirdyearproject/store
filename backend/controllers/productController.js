@@ -22,6 +22,8 @@ exports.newProduct=catchAsyncErrors(async(req,res,next)=>{
 //get all products=>/api/v1/products?keyword=.....
 exports.getProducts=catchAsyncErrors(async(req,res,next)=>{
 
+    const resPerPage=8;
+    const productsCount=await Product.countDocuments();
     const apiFeatures=new APIFeatures(Product.find(),req.query)
                         .search()
                         .filter()
@@ -29,12 +31,12 @@ exports.getProducts=catchAsyncErrors(async(req,res,next)=>{
 
     res.status(200).json({
         success:true,
-        count:products.length,
+        productsCount,
         products
     })
 })
 
-//get seingle product=>/api/v1/admin/product/:id
+//get seingle product=>/api/v1/product/:id
 exports.getSingleProduct=catchAsyncErrors(async(req,res,next)=>{
     const product=await Product.findById(req.params.id);
     if(!product){

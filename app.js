@@ -85,11 +85,13 @@ const errorMiddleware=require('./backend/middlewares/errors')
 
 
 //Import all routes
-const products=require('./backend/routes/product');
-const users=require('./backend/routes/user');
+const product=require('./backend/routes/product');
+const user=require('./backend/routes/user');
+const order = require("./backend/routes/order");
 
-app.use('/api/v1',products)
-app.use('/api/v1',users)
+app.use("/api/v1", product);
+app.use("/api/v1", user);
+app.use("/api/v1", order);
 
 //middleware to handle errors
 app.use(errorMiddleware);
@@ -162,50 +164,43 @@ app.get("/auth/google/secrets",
 app.get("/personalAccount",function(req,res){
   res.render("login");
 });
-
-app.get("/login", function(req, res){
-  res.render("login");
-});
-app.get("/register", function(req, res){
-  res.render("register");
-});
 app.get("/Account", function(req, res){
 
         res.render("personalAccount");
 });
 
-app.post("/register", function(req, res){
+// app.post("/register", function(req, res){
 
-  LOGINUSER.register({username: req.body.username}, req.body.password, function(err, user){
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/Account");
-      });
-    }
-  });
+//   LOGINUSER.register({username: req.body.username}, req.body.password, function(err, user){
+//     if (err) {
+//       console.log(err);
+//       res.redirect("/register");
+//     } else {
+//       passport.authenticate("local")(req, res, function(){
+//         res.redirect("/Account");
+//       });
+//     }
+//   });
 
-});
+// });
 
-app.post("/login", function(req, res){
+// app.post("/login", function(req, res){
 
-  const user = new LOGINUSER({
-    username: req.body.username,
-    password: req.body.password
-  });
+//   const user = new LOGINUSER({
+//     username: req.body.username,
+//     password: req.body.password
+//   });
 
-  req.login(user, function(err){
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/Account");
-      });
-    }
-  });
-});
+//   req.login(user, function(err){
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       passport.authenticate("local")(req, res, function(){
+//         res.redirect("/Account");
+//       });
+//     }
+//   });
+// });
 ///////////////////////////////////////
 app.get("/BlogMainPage", async (req, res) => {
   pageModel.find({})
