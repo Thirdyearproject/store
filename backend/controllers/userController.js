@@ -8,7 +8,6 @@ const sendToken = require('../utils/jwtToken');
 //Register user=>/api/v1/register
 exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
     const{name,email,password}=req.body;
-
     const user=await User.create({
         name,
         email,
@@ -19,7 +18,7 @@ exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
         }
     
     })
-    sendToken(user,200,res)
+    sendToken(user,200,res,"/Account")
 })
 
 //Login User=> /api/v1/login
@@ -42,8 +41,9 @@ exports.loginUser=catchAsyncErrors(async(req,res,next)=>{
 
     if(!isPasswordMatched){
         return next(new ErrorHandler('Invalid Email or Password',401));
-    }
-    sendToken(user,200,res)
+    }s
+    sendToken(user,200,res,"/Account")
+
 })
 
 //Logout user=>/api/v1/logout

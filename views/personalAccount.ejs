@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/acc_style.css">
+</head>
+
+<body>
+    <div class="bg">
+        <h2>My Account</h2>
+        <div class="account_page">
+            <div class="profile">
+                <div class="profile_detail">
+                    <img src="../public/images/testimonial-1.jpg" alt="User's picture">
+                </div>
+                <ul>
+                    <li class="active"><a href="Account.html">Personal Data<span>></span></a></li>
+                    <li><a href="order.html">My Orders<span>></span></a></li>
+                    <li><a href="cart.html">Cart<span>></span></a></li>
+                    <li><a href="">Change password<span>></span></a></li>
+                    <li><a href="">Log Out<span>></span></a></li>
+                </ul>
+            </div>
+            <div class="account_detail">
+                <form class="Personal" action="">
+                    <h3>Details</h3>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="">First Name</label>
+                            <input type="text" name="fname">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Last Name</label>
+                            <input type="text" name="lname">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Company Name (Optional)</label>
+                        <input type="text" name="cname">
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="">Country</label>
+                            <select name="Country" id="">
+                                <option value="0">---Select a Country---</option>
+                                <option value="1">India</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">State</label>
+                            <select name="Country" id="">
+                                <option value="0">---Select a State---</option>
+                                <option value="1">Bihar</option>
+                                <option value="2">Maharastra</option>
+                                <option value="3">West Bengal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <textarea name="Address" id="" rows="5">Enter your address</textarea>
+                    </div>
+                    <h3>Contact Details</h3>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="">Mobile No.</label>
+                            <input type="number" name="mobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email ID</label>
+                            <input type="email" name="email">
+                        </div>
+                    </div>
+
+                    <h3>Additional Information (Optional)</h3>
+                    <div class="form-group">
+                        <label for="">Delivery Instructions</label>
+                        <textarea name="Instructions" id="" rows="5">eg. Leave parcel with watchman</textarea>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input type="submit" id="Update" name="Update" value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
