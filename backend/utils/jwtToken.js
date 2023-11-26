@@ -13,7 +13,7 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
     }
     if(user.role=="admin"){  
     if (statusCode === 200 && redirectRoute) {
-        res.redirect("personalAccount",{t:true})
+        res.render("personalAccount",{t:true})
       }else{
         console.log("No redirect route provided.");
         res.status(statusCode).cookie('token',token,options).json({
