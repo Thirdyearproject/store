@@ -58,8 +58,9 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
 })
 //update product=>/api/v1/admin/product/:id
 exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
+    console.log("enter")
     let product=await Product.findById(req.params.id);
-
+    console.log("out")
     if(!product){
         return next(new ErrorHandler('Product not found',404))
     }
