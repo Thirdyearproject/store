@@ -26,7 +26,6 @@ exports.getProducts=catchAsyncErrors(async(req,res,next)=>{
                         .search()
                         .filter()
     const products=await apiFeatures.query;
-
     res.status(200).json({
         success:true,
         productsCount,
@@ -46,7 +45,17 @@ exports.getSingleProduct=catchAsyncErrors(async(req,res,next)=>{
         product
     })
 })
+// Get all products (Admin)  =>   /api/v1/admin/products
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
 
+    const products = await Product.find();
+
+    res.status(200).json({
+        success: true,
+        products
+    })
+
+})
 //update product=>/api/v1/admin/product/:id
 exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
     let product=await Product.findById(req.params.id);
@@ -58,7 +67,7 @@ exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
     product=await Product.findByIdAndUpdate(req.params.id,req.body,{
         new:true,
         runValidators:true,
-        //useFindAndModify:false
+        useFindAndModify:false
     });
 
     res.status(200).json({
