@@ -467,14 +467,14 @@
                     <% products.forEach(function(t) { %>
                       <div class="showcase">
 
-                        <a href="#" class="showcase-img-box">
+                        <a href="<%=t.images.url%>" class="showcase-img-box">
                           <img src="<%= t.images.url %>" alt="relaxed short full sleeve t-shirt" width="70"
                             class="showcase-img">
                         </a>
 
                         <div class="showcase-content">
 
-                          <a href="#">
+                          <a href="/api/v1/product/<%=t.id%>">
                             <h4 class="showcase-title">
                               <%= t.name %>
                             </h4>

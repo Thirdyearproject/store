@@ -168,35 +168,9 @@ app.get("/personalAccount",function(req,res){
   res.render("login");
 });
 app.get("/Account", function(req, res){
-
-        res.render("personalAccount");
+        res.render("personalAccount",{t:statusCode});
 });
 
-// app.post("/api/v1/register", function(req, res){
-//     if (err) {
-//       console.log(err);
-//       res.redirect("/register");
-//     } else {
-//         res.redirect("/Account")
-//     }
-// });
-
-// app.post("/login", function(req, res){
-//   const user = new LOGINUSER(
-//     username: req.body.username,
-//     password: req.body.password
-//   });
-
-//   req.login(user, function(err){
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       passport.authenticate("local")(req, res, function(){
-//         res.redirect("/Account");
-//       });
-//     }
-//   });
-// });
 ///////////////////////////////////////
 app.get("/BlogMainPage", async (req, res) => {
   pageModel.find({})
@@ -343,6 +317,11 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
   }).catch((y)=>{
       console.log(y)
   })
+})
+
+
+app.get("/admin/product",function(req,res){
+  res.render("product")
 })
 
 module.exports = app;
