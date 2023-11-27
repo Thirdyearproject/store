@@ -11,10 +11,9 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
         ),
         httpOnly:true
     }
-
-    
-    if (statusCode === 200 && redirectRoute) {
-        res.redirect(redirectRoute);
+    if(user.role=="admin"){  
+    if (statusCode === 200) {
+        res.render("personalAccount",{t:true})
       }else{
         console.log("No redirect route provided.");
         res.status(statusCode).cookie('token',token,options).json({
@@ -23,5 +22,17 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
             user
         })
       }
+    }else{
+        if (statusCode === 200 && redirectRoute) {
+            res.redirect(redirectRoute);
+          }else{
+            console.log("No redirect route provided.");
+            res.status(statusCode).cookie('token',token,options).json({
+                success:true,
+                token,
+                user
+            })
+          }
+    }
 }
 module.exports=sendToken;

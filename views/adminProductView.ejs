@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+
+    <link rel="shortcut icon" href="../public/images/logo/favicon.ico" type="./image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-box {
+            padding: 20px;
+        }
+
+        .product-minimal {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .product-showcase {
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .showcase-container {
+            display: block;
+        }
+
+        .showcase {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 20px;
+            padding: 10px;
+        }
+
+        .showcase-img-box {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .showcase-content {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .showcase-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .showcase-category {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .price-box {
+            font-weight: bold;
+            color: #e44d26;
+        }
+
+        .buttons {
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .update-btn {
+            background-color: #4caf50;
+            /* Green */
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            /* Red */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Products</h1>
+
+    <div class="product-box">
+
+        <!-- PRODUCT MINIMAL -->
+
+        <div class="product-minimal">
+
+            <div class="product-showcase">
+
+
+                <div>
+
+                    <div class="showcase-container">
+                        <!-- Products Loop -->
+                        <% products.forEach(function(t) { %>
+                            <div class="showcase">
+
+                                <a href="<%=t.images.url%>" class="showcase-img-box">
+                                    <img src="<%= t.images.url %>" alt="relaxed short full sleeve t-shirt" width="70"
+                                        class="showcase-img">
+                                </a>
+
+                                <div class="showcase-content">
+
+                                    <a href="/api/v1/product/<%=t.id%>">
+                                        <h4 class="showcase-title">
+                                            <%= t.name %>
+                                        </h4>
+                                    </a>
+
+                                    <a href="#" class="showcase-category">
+                                        <%= t.category %>
+                                    </a>
+
+                                    <div class="price-box">
+                                        <p class="price">
+                                            $<%=t.price %>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="buttons">
+                                    <a href="/admin/productUpdate/<%=t.id%>"><button
+                                            class="update-btn">Update</button></a>
+                                    <form action="/api/v1/admin/product/<%=t.id%>?_method=delete" method="post">
+                                        <a><button>Delete</button></a>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                            <% } )%>
+                                <!-- End Products Loop -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

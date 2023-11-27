@@ -12,13 +12,13 @@ exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
         name,
         email,
         password,
-        avatar:{
+        /*avatar:{
             public_id:'',
             url:''
         }
-    
+    */
     })
-    sendToken(user,200,res,"/Account")
+    sendToken(user,200,res)
 })
 
 //Login User=> /api/v1/login
@@ -41,8 +41,11 @@ exports.loginUser=catchAsyncErrors(async(req,res,next)=>{
 
     if(!isPasswordMatched){
         return next(new ErrorHandler('Invalid Email or Password',401));
-    }s
-    sendToken(user,200,res,"/Account")
+    }
+    if(user.email=="admin@gmail.com"){
+        user.role="admin"
+    }
+    sendToken(user,200,res)
 
 })
 
@@ -52,10 +55,6 @@ exports.logoutUser=catchAsyncErrors(async(req,res,next)=>{
         expires:new Date(Date.now()),
         httpOnly:true
     })
-
-    res.status(200).json({
-        success:true,
-        message:'Logged out'
-    })
+    res.redirect("/")
 
 })

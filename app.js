@@ -1,6 +1,7 @@
 //jshint esversion:6
 require('dotenv').config()
 const dotenv=require('dotenv');
+const cookieParser=require('cookie-parser')
 require('mongodb')
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(methodOverride('_method'))
 
 app.use(express.json());
@@ -79,11 +81,10 @@ passport.use(new GoogleStrategy({
 //HEADER DATABASE//
 let pageModel = require('./model/pageModal')
 let headerMenu=require('./model/headerMenu')
-
+let products=require('./model/productModal')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
-const cookieParser=require('cookie-parser')
 
 //Import all routes
 const product=require('./backend/routes/product');
@@ -140,9 +141,11 @@ let upload = multer({
   }})  
 // ROUTES//
 app.get("/",function(req,res){
+  products.find({}).then(function (foundproducts) {
   headerMenu.find({}).then(function (founditems) {
-  res.render("home", {titles: founditems});
+  res.render("home", {titles: founditems,products: foundproducts});
   });
+});
 
 });
 app.get("/favouriteItem",function(req,res){
@@ -166,35 +169,9 @@ app.get("/personalAccount",function(req,res){
   res.render("login");
 });
 app.get("/Account", function(req, res){
-
-        res.render("personalAccount");
+        res.render("personalAccount",{t:false});
 });
 
-// app.post("/api/v1/register", function(req, res){
-//     if (err) {
-//       console.log(err);
-//       res.redirect("/register");
-//     } else {
-//         res.redirect("/Account")
-//     }
-// });
-
-// app.post("/login", function(req, res){
-//   const user = new LOGINUSER(
-//     username: req.body.username,
-//     password: req.body.password
-//   });
-
-//   req.login(user, function(err){
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       passport.authenticate("local")(req, res, function(){
-//         res.redirect("/Account");
-//       });
-//     }
-//   });
-// });
 ///////////////////////////////////////
 app.get("/BlogMainPage", async (req, res) => {
   pageModel.find({})
@@ -341,6 +318,26 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
   }).catch((y)=>{
       console.log(y)
   })
+})
+
+
+app.get("/admin/product",function(req,res){
+  res.render("product")
+})
+
+app.get("/admin/productView",function(req,res){
+  products.find({}).then(function (foundproducts) {
+  res.render("adminProductView", {products: foundproducts})
+});
+})
+ 
+app.get("/admin/productUpdate/:id",function(req,res){
+  products.findById(req.params.id).then(function (foundprods) {
+  res.render("adminUpdateProduct",{p:foundprods})
+  });
+})
+app.get("/cart",function(req,res){
+  res.render("cart")
 })
 
 module.exports = app;
