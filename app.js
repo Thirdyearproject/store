@@ -90,10 +90,12 @@ const errorMiddleware=require('./backend/middlewares/errors')
 const product=require('./backend/routes/product');
 const user=require('./backend/routes/user');
 const order = require("./backend/routes/order");
+const payment=require("./backend/routes/payment");
 
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
+app.use("/api/v1",payment);
 
 //middleware to handle errors
 app.use(errorMiddleware);

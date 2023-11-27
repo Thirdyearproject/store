@@ -1,7 +1,14 @@
 const app=require('../app')
 const connectDatabase=require('./config/database');
+import Razorpay from 'razorpay';
 
 const dotenv=require('dotenv');
+
+//razorpay
+export const instance=new Razorpay({
+    key_id:process.env.RAZORPAY_API_KEY,
+    key_secret:process.env.RAZORPAY_API_SECRET
+})
 
 //handle uncaught exceptions
 process.on('uncaughtException',err=>{
