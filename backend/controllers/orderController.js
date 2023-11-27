@@ -27,10 +27,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     user: req.user._id,
   });
 
-  res.status(200).json({
-    success:true,
-    order
-  })
+  res.status(200).redirect("/Account")
 });
 
 
