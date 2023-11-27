@@ -18,7 +18,7 @@ exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
         }
     */
     })
-    sendToken(user,200,res)
+    sendToken(user,200,res,"/personalAccount")
 })
 
 //Login User=> /api/v1/login
@@ -45,7 +45,7 @@ exports.loginUser=catchAsyncErrors(async(req,res,next)=>{
     if(user.email=="admin@gmail.com"){
         user.role="admin"
     }
-    sendToken(user,200,res)
+    sendToken(user,200,res,"/Account")
 
 })
 

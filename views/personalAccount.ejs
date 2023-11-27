@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/acc_style.css">
 </head>
 
@@ -26,10 +27,16 @@
                         </div>
                         <ul>
                             <li class="active"><a href="Account.html">Personal Data<span>></span></a></li>
-                            <li><a href="/api/v1/order/me">My Orders<span>></span></a></li>
-                            <li><a href="/cart">Cart<span>></span></a></li>
-                            <li><a href="">Change password<span>></span></a></li>
-                            <li><a href="/api/v1/logout">Log Out<span>></span></a></li>
+                            <% if(t) {%>
+                                <li><a href="/adminOrder">All Orders<span>></span></a></li>
+                                <%} else{%>
+                                    <li><a href="/api/v1/order/me">My Orders<span>></span></a></li>
+
+                                    <%}%>
+
+                                        <li><a href="/shoppingCart">Cart<span>></span></a></li>
+                                        <li><a href="">Change password<span>></span></a></li>
+                                        <li><a href="/api/v1/logout">Log Out<span>></span></a></li>
                         </ul>
                     </div>
                     <div class="account_detail">

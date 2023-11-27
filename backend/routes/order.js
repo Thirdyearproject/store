@@ -8,7 +8,7 @@ const { isAuthenticatedUser, authorizedRoles } = require("../middlewares/user");
 
 router.route("/order/new").post(isAuthenticatedUser, newOrder);
 router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
-router.route("/order/me").get(isAuthenticatedUser, myOrders);
+router.route("/orders/me").get(isAuthenticatedUser, myOrders);
 router.route("/admin/order").get(isAuthenticatedUser, authorizedRoles('admin'),getAllOrders);
 
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Order</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/acc_style">
+    <style>
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .product-details span {
+            color: #555;
+        }
+
+        .order-details,
+        .product-details {
+            margin-bottom: 20px;
+        }
+
+        .product-details img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .product-details h3 {
+            margin-bottom: 5px;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <h2>My Orders</h2>
+        <div class="account_page">
+            <div class="account_detail">
+                <% orders.forEach(function(t) { %>
+                    <div class="order-details">
+                        <h2>Order : <%= t._id %>
+                        </h2>
+                        <p>Date : <%= t.paidAt %>
+                        </p>
+                        <p>Status : <%= t.orderStatus %>
+                        </p>
+                    </div>
+                    <div class="product-details">
+                        <input type="url" value="<%= t.image %>">
+                    </div>
+
+                    <div class="order-details">
+                        <h2>Order Summary</h2>
+                        <p>Price : <%= t.itemsPrice %>
+                        </p>
+                        <p>Tax: <%= t.taxPrice %>
+                        </p>
+                        <p>Shipping: <%= t.shippingPrice %>
+                        </p>
+                        <p>Total Price: <%= t.totalPrice %>
+                        </p>
+                    </div>
+                    <% } )%>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
