@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema({
         minlength:[6,'Your password must be longer than 6 characters'],
         select:false
     },
-    avatar:{
+    /*avatar:{
         public_id:{
             type:String,
             //required:true
@@ -31,7 +31,7 @@ const userSchema=new mongoose.Schema({
             type:String,
             //required:true
         }
-    },
+    },*/
     role:{
         type:String,
         default:'user'
@@ -61,9 +61,11 @@ userSchema.methods.comparePassword=async function(enteredPassword){
 
 //return JWT token
 userSchema.methods.getJwtToken=function(){
-    return jwt.sign({id:this._id},process.env.JWT_SECRET,{
-        expiresIn:process.env.JWT_EXPIRES_TIME
+    const token= jwt.sign({id:this._id},process.env.JWT_SECRET,{
+        expiresIn:"36000s"
     })
+    console.log("token created")
+    return token
 }
 
 module.exports=mongoose.model('User',userSchema);

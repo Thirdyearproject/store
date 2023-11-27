@@ -1,6 +1,7 @@
 //jshint esversion:6
 require('dotenv').config()
 const dotenv=require('dotenv');
+const cookieParser=require('cookie-parser')
 require('mongodb')
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(methodOverride('_method'))
 
 app.use(express.json());
@@ -83,7 +85,6 @@ let products=require('./model/productModal')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
-const cookieParser=require('cookie-parser')
 
 //Import all routes
 const product=require('./backend/routes/product');
