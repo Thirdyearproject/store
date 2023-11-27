@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .product-details {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <title>Single Product</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Product Page</h1>
+    </header>
+
+    <div class="product-container">
+
+        <div class="product-details">
+            <h2>
+                <%= p.name %>
+            </h2>
+            <p>
+                <%= p.description %>
+            </p>
+        </div>
+        <p class="price">Price : <%=p.price %>
+        </p>
+        <p>ID : <%= p._id %>
+        </p>
+        <p>Category : <%= p.category %>
+        </p>
+        <p>Seller : <%= p.seller %>
+        </p>
+        <p>Stock : <%= p.stock %>
+        </p>
+        <p>No. of Reviews : <%= p.numofReviews %>
+        </p>
+        <p>Date : <%= p.createdAt %>
+        </p>
+        <p>Rating : <%= p.ratings %>
+        </p>
+        <p>public ID : <%= p.public_id %>
+        </p>
+    </div>
+
+</body>
+
+</html>

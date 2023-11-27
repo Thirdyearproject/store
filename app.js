@@ -344,5 +344,14 @@ app.get("/adminOrder",function(req,res){
     res.render("order", {orders: foundorder})
   });
 })
-
+app.get("/product/:id",function(req,res){
+  products.findById(req.params.id).then(function (foundprods) {
+  res.render("singleProduct",{p:foundprods})
+  });
+})
+// app.get("/order/:id",function(req,res){
+//   Order.findById(req.params.id).then(function (foundorder) {
+//   res.render("singleOrder",{p:foundorder})
+//   });
+// })
 module.exports = app;
