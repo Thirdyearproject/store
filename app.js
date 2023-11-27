@@ -168,7 +168,7 @@ app.get("/personalAccount",function(req,res){
   res.render("login");
 });
 app.get("/Account", function(req, res){
-        res.render("personalAccount",{t:statusCode});
+        res.render("personalAccount",{t:false});
 });
 
 ///////////////////////////////////////
@@ -322,6 +322,10 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
 
 app.get("/admin/product",function(req,res){
   res.render("product")
+})
+
+app.get("/cart",function(req,res){
+  res.render("cart")
 })
 
 module.exports = app;
