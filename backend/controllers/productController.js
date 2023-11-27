@@ -9,10 +9,7 @@ const APIFeatures=require('../utils/apiFeatures');
 //create new product=> /api/v1/admin/product/new
 exports.newProduct=catchAsyncErrors(async(req,res,next)=>{  
     const product=await Product.create(req.body);
-    res.status(201).json({
-        success:true,
-        product
-    })
+    res.status(201).redirect('/admin/');
 })
 
 
@@ -71,10 +68,7 @@ exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
         useFindAndModify:false
     });
 
-    res.status(200).json({
-        success:true,
-        product
-    })
+    res.status(200).redirect("/admin/productView")
 
 })
 
@@ -86,10 +80,7 @@ exports.deleteProduct=catchAsyncErrors(async(req,res,next)=>{
         return next(new ErrorHandler('Product not found',404))
     }
 
-    await product.remove();
+    await product.deleteOne();
 
-    res.status(200).json({
-        success:true,
-        message:'product deleted'
-    })
+    res.status(200).redirect("/admin/productView")
 })

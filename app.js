@@ -82,6 +82,7 @@ passport.use(new GoogleStrategy({
 let pageModel = require('./model/pageModal')
 let headerMenu=require('./model/headerMenu')
 let products=require('./model/productModal')
+let Order=require('./backend/models/order')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
@@ -171,7 +172,7 @@ app.get("/personalAccount",function(req,res){
   res.render("login");
 });
 app.get("/Account", function(req, res){
-        res.render("personalAccount",{t:statusCode});
+        res.render("personalAccount",{t:false});
 });
 
 ///////////////////////////////////////
@@ -325,6 +326,23 @@ app.delete('/admin/pages/delete-pages/:id', (req, res)=>{
 
 app.get("/admin/product",function(req,res){
   res.render("product")
+})
+
+app.get("/admin/productView",function(req,res){
+  products.find({}).then(function (foundproducts) {
+  res.render("adminProductView", {products: foundproducts})
+});
+})
+ 
+app.get("/admin/productUpdate/:id",function(req,res){
+  products.findById(req.params.id).then(function (foundprods) {
+  res.render("adminUpdateProduct",{p:foundprods})
+  });
+})
+app.get("/adminOrder",function(req,res){
+  Order.find({}).then(function (foundorder) {
+    res.render("order", {orders: foundorder})
+  });
 })
 
 module.exports = app;

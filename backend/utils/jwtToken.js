@@ -12,7 +12,7 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
         httpOnly:true
     }
     if(user.role=="admin"){  
-    if (statusCode === 200 && redirectRoute) {
+    if (statusCode === 200) {
         res.render("personalAccount",{t:true})
       }else{
         console.log("No redirect route provided.");
