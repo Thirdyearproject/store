@@ -82,6 +82,7 @@ passport.use(new GoogleStrategy({
 let pageModel = require('./model/pageModal')
 let headerMenu=require('./model/headerMenu')
 let products=require('./model/productModal')
+let Order=require('./backend/models/order')
 
 //update part*******************************************************************************************
 const errorMiddleware=require('./backend/middlewares/errors')
@@ -336,8 +337,10 @@ app.get("/admin/productUpdate/:id",function(req,res){
   res.render("adminUpdateProduct",{p:foundprods})
   });
 })
-app.get("/cart",function(req,res){
-  res.render("cart")
+app.get("/adminOrder",function(req,res){
+  Order.find({}).then(function (foundorder) {
+    res.render("order", {orders: foundorder})
+  });
 })
 
 module.exports = app;
