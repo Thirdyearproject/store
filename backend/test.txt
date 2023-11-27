@@ -1,0 +1,28 @@
+{
+    "itemsPrice":2.75,
+    "taxPrice":0.14,
+    "shippingPrice":25,
+    "totalPrice":27.89,
+    "orderItems":[
+        {
+        "product":"65632d3ebb415d35d0427b62",
+        "name":"Kauffman Orchards Homegrown McIntosh Apples",
+        "price":2.75,
+        "image":"https://res.cloudinary.com/bookit/image/upload/v1606293152/products/i0…",
+        "quantity":1
+
+        }
+    ],
+    "shippingInfo":{
+        "address":"3971bjujh",
+        "city":"bjg",
+        "phoneNo":34567895678,
+        "postalCode":712407,
+        "country":"India"
+
+    },
+    "paymentInfo":{
+        "id":"234567dfghjk5678",
+        "status":"succeeded"
+    }
+}
