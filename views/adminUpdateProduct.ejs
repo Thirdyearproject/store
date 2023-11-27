@@ -4,30 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
+    <title>Update Product Details</title>
 </head>
 
 <body>
 
     <header>
-        <h1>Product Details</h1>
+        <h1>Update Product Details</h1>
     </header>
 
     <div class="container">
         <div class="product-details">
-            <form method="post" action="/api/v1/admin/product/new">
+            <form method="post" action="/api/v1/admin/product/<%=p.id%>?_method=put">
+                <input type="hidden" name="_method" value="PUT">
                 <div class="product-info">
                     <h2>Product Name</h2>
-                    <input type="text" value="" name="name" placeholder="Enter product name" />
-                    <p>Image URL: <input type="url" name="url" value="" placeholder="Enter image URL" /></p>
+                    <input type="text" value="<%=p.name%>" name="name" placeholder="Enter product name" />
+                    <p>Image URL: <input type="url" name="url" value="<%=p.url%>" placeholder="Enter image URL" /></p>
                     <p>Description</p>
                     <textarea name="description" placeholder="Enter product description"></textarea>
-                    <p>Price: $<input type="number" name="price" value="" step="0.01"
+                    <p>Price: $<input type="number" name="price" value="<%=p.price%>" step="0.01"
                             placeholder="Enter product price" /></p>
-                    <p>Category: <input type="text" name="category" value="" placeholder="Enter product category" /></p>
-                    <p>Seller: <input type="text" name="seller" placeholder="Enter seller name" /></p>
-                    <p>Stock: <input type="number" name="stock" value="" placeholder="Enter product stock" /></p>
-                    <p>Ratings: <input type="number" value="" step="0.1" placeholder="Enter product rating" /></p>
+                    <p>Category: <input type="text" name="category" value="<%=p.category%>"
+                            placeholder="Enter product category" /></p>
+                    <p>Seller: <input type="text" name="seller" value="<%=p.seller%>" placeholder="Enter seller name" />
+                    </p>
+                    <p>Stock: <input type="number" name="stock" value="<%=p.stock%>"
+                            placeholder="Enter product stock" /></p>
+                    <p>Ratings: <input type="number" step="0.1" placeholder="Enter product rating" /></p>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

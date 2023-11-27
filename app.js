@@ -325,6 +325,17 @@ app.get("/admin/product",function(req,res){
   res.render("product")
 })
 
+app.get("/admin/productView",function(req,res){
+  products.find({}).then(function (foundproducts) {
+  res.render("adminProductView", {products: foundproducts})
+});
+})
+ 
+app.get("/admin/productUpdate/:id",function(req,res){
+  products.findById(req.params.id).then(function (foundprods) {
+  res.render("adminUpdateProduct",{p:foundprods})
+  });
+})
 app.get("/cart",function(req,res){
   res.render("cart")
 })
