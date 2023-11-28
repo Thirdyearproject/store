@@ -9,11 +9,11 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
         expires:new Date(
             Date.now()+process.env.COOKIE_EXPIRES_TIME*24*60*60*1000
         ),
-        httpOnly:true
+        // httpOnly:true
     }
     if(user.role=="admin"){  
     if (statusCode === 200) {
-        res.render("personalAccount",{t:true})
+        res.cookie('token',token,options).render("personalAccount",{t:true})
       }else{
         console.log("No redirect route provided.");
         res.status(statusCode).cookie('token',token,options).json({
@@ -24,7 +24,7 @@ const sendToken=(user,statusCode,res, redirectRoute)=>{
       }
     }else{
         if (statusCode === 200 && redirectRoute) {
-            res.redirect(redirectRoute);
+            res.cookie('token',token,options).redirect(redirectRoute);
           }else{
             console.log("No redirect route provided.");
             res.status(statusCode).cookie('token',token,options).json({
